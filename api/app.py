@@ -21,6 +21,7 @@ def ocr_captcha(img_con: bytes):
             headers=headers,
             files=files
         )
+        print (code_cp.json())
         return code_cp.json()['result']['output'][0]
     except Exception as e:
         return None
