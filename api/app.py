@@ -11,7 +11,7 @@ def ocr_captcha(img_con: bytes):
             'Referer': 'https://decopy.ai/',
             'Origin': 'https://decopy.ai',
             'Product-Code': '0967003',
-            'Product-Serial': '2a0d2fc3c7b0d1a118dd6713257968fb5',
+            'Product-Serial': '2a0d2fc3c7b0d1a118dd6713259968fb5',
         }
         files = {
             'upload_images': ('BotDetectCaptcha.jpg', img_con, 'image/jpeg'),
