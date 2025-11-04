@@ -1,17 +1,29 @@
 from flask import Flask, request, jsonify
 import requests
 import base64
+import random
+import string
+
+
+def random_serial(length=32):
+    return ''.join(random.choices(string.hexdigits.lower(), k=length))
 
 app = Flask(__name__)
-
+ua = random.choice([
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.80 Safari/537.36',
+    'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:97.0) Gecko/20100101 Firefox/97.0',
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36'
+])
 def ocr_captcha(img_con: bytes):
     try:
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:144.0) Gecko/209100101 Firefox/144.0',
+            'User-Agent': ua,
             'Referer': 'https://decopy.ai/',
             'Origin': 'https://decopy.ai',
             'Product-Code': '0967003',
-            'Product-Serial': '2a0d2fc3c7b0d1a118dd6713259968fb5',
+            'Product-Serial': random_serial(),
         }
         files = {
             'upload_images': ('BotDetectCaptcha.jpg', img_con, 'image/jpeg'),
